@@ -1,6 +1,6 @@
 {
   "name": "codenodes",
-  "description": "source code as nodes",
+  "description": "A generic source code processor in JavaScript based on regular expressions.",
   "keywords": [
     "codenodes"
   ],
