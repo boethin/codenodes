@@ -1,0 +1,17 @@
+{
+  "name": "codenodes",
+  "description": "source code as nodes",
+  "keywords": [
+    "codenodes"
+  ],
+  "version": "0.0.1",
+  "author": {
+    "name": "autobugfix",
+    "email": "bugs@autobugfix.com"
+  },
+  "main": "lib/index",
+  "bin": {
+    "client": "./bin/client.js"
+  }
+
+}
