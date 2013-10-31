@@ -1,4 +1,6 @@
 codenodes
 =========
 
-A generic source code processor in JavaScript based on regular expressions.
+A generic source code processing framework in JavaScript.
+
+project currently under construction
