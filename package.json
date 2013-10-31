@@ -1,13 +1,25 @@
 {
   "name": "codenodes",
-  "description": "A generic source code processor in JavaScript based on regular expressions.",
+  "description": "A generic source code processing framework.",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/boethin/codenodes"
+  },
   "keywords": [
     "codenodes"
   ],
   "version": "0.0.1",
   "author": {
-    "name": "autobugfix",
-    "email": "bugs@autobugfix.com"
+    "name": "Sebastian Boethin",
+    "email": "sebastian@boethin.eu"
+  },
+  "bugs": {
+    "email": "bugs@autobugfix.com",
+    "url": "https://github.com/boethin/codenodes/issues"
+  },
+  "license": {
+    "type": "MIT",
+    "url": "https://github.com/boethin/codenodes/blob/master/LICENSE"
   },
   "main": "lib/index",
   "bin": {
