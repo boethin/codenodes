@@ -9,6 +9,9 @@
     "codenodes"
   ],
   "version": "0.0.1",
+  "dependencies": {
+    "Preprocessor.js": "1.0.4"
+  },
   "author": {
     "name": "Sebastian Boethin",
     "email": "sebastian@boethin.eu"
