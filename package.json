@@ -10,7 +10,8 @@
   ],
   "version": "0.0.1",
   "dependencies": {
-    "preprocessor": "1.0.4"
+    "preprocessor": "1.0.4",
+    "optimist": ">=0.6.0"
   },
   "author": {
     "name": "Sebastian Boethin",
