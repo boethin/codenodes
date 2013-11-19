@@ -58,9 +58,14 @@ client_output := $(client_main_out) $(call client_lang_out,$(languages))
 ##
 client_main_depts := $(wildcard $(addsuffix /*.js,$(lib_dir) $(core_dir) $(rules_dir)))
 
+##
+## options
+##
+client_bin_lang_opt := $(client_bin_opt) --externs $(client_main_out) --jscomp_off=externsValidation
+
 # language specific client code
 $(client_lang_pattern) : $(lang_dir)/%.js $(client_main_out)
-	$(nodejs) $(client_bin) -l $(call langname,$<) --externs $(client_main_out) --jscomp_off=externsValidation $(client_bin_opt) -o $@
+	$(nodejs) $(client_bin) -l $(call langname,$<) $(client_bin_lang_opt) -o $@
 
 # core client code
 $(client_main_out) : $(client_main_depts)
