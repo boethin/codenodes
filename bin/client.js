@@ -39,8 +39,8 @@
     .describe("compilation_level",
       "Pass a compilation level of the closure compiler.")
 
-    .describe("externals",
-      "Pass an external to the closure compiler.")
+    .describe("externs",
+      "Pass extern to the closure compiler.")
 
     .describe("jscomp_off",
       "Silences warnings from the the closure compiler of the given type.")
@@ -129,8 +129,8 @@
           var opt = {}; // closure compiler options
           if (argv.compilation_level)
             opt.compilation_level = argv.compilation_level;
-          if (argv.externals)
-            opt.externals = argv.externals;
+          if (argv.externs)
+            opt.externs = argv.externs;
           if (argv.jscomp_off)
             opt.jscomp_off = argv.jscomp_off;
           if (argv.flagfile)
