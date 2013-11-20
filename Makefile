@@ -23,20 +23,20 @@ nodejs=/usr/local/bin/node
 ##
 client_bin = $(bin_dir)/client.js
 
-client_bin_opt = --compilation_level ADVANCED_OPTIMIZATIONS
-
+client_options = --compilation_level ADVANCED_OPTIMIZATIONS
+client_debug_options = --debug
 
 ##
 ## language defintions
 ##
 
-# The language identifier if the basename of the language file.
+# the language identifier if the basename of the language file
 langname = $(basename $(notdir $(1)))
 
-# The language files are the .js files in $(lang_dir).
+# the language files are the .js files in $(lang_dir)
 lang_src := $(wildcard $(lang_dir)/*.js)
 
-# All the language identifiers.
+# all the language identifiers
 languages := $(call langname,$(lang_src))
 
 ##
@@ -45,35 +45,60 @@ languages := $(call langname,$(lang_src))
 
 # main client output
 client_main_out = $(client_dir)/codenodes.js
+client_main_debug := $(client_dir)/codenodes.debug.js
 
-# langugae-specific client output
+# language-specific client output
 client_lang_pattern := $(client_dir)/codenodes-lang-%.js
-client_lang_out = $(patsubst %,$(client_lang_pattern),$(1))
+client_lang_debug_pattern := $(client_dir)/codenodes-lang-%.debug.js
 
-# client code output
-client_output := $(client_main_out) $(call client_lang_out,$(languages))
+client_lang_map = $(patsubst %,$(client_lang_pattern),$(1))
+client_lang_debug_map = $(patsubst %,$(client_lang_debug_pattern),$(1))
+
+# complete client output
+client_targets := $(client_main_out) $(call client_lang_map,$(languages))
+client_debug_targets := $(client_main_debug) $(call client_lang_debug_map,$(languages))
 
 ##
 ## dependencies
 ##
-client_main_depts := $(wildcard $(addsuffix /*.js,$(lib_dir) $(core_dir) $(rules_dir)))
+client_main_deps := $(client_bin) \
+  $(wildcard $(addsuffix /*.js,$(lib_dir) $(core_dir) $(rules_dir)))
 
 ##
-## options
+## args
 ##
-client_bin_lang_opt := $(client_bin_opt) --externs $(client_main_out) --jscomp_off=externsValidation
+client_args := $(client_options)
+client_lang_args := $(client_options) \
+  --externs $(client_main_out) --jscomp_off=externsValidation
+client_debug_args := $(client_debug_options)
+client_lang_debug_args := $(client_debug_options)
+
+##
+## rules
+##
+
+all : client client-debug
+.PHONY : all
+
+client : $(client_targets)
+
+client-debug : $(client_debug_targets)
+
+# language specific client code (debug)
+$(client_lang_debug_pattern) : $(lang_dir)/%.js
+	$(nodejs) $(client_bin) -l $(call langname,$<) $(client_lang_debug_args) -o $@
 
 # language specific client code
 $(client_lang_pattern) : $(lang_dir)/%.js $(client_main_out)
-	$(nodejs) $(client_bin) -l $(call langname,$<) $(client_bin_lang_opt) -o $@
+	$(nodejs) $(client_bin) -l $(call langname,$<) $(client_lang_args) -o $@
 
-# core client code
-$(client_main_out) : $(client_main_depts)
-	$(nodejs) $(client_bin) $(client_bin_opt) -o $@
+# client main (debug)
+$(client_main_debug) : $(client_main_deps)
+	$(nodejs) $(client_bin) $(client_debug_args) -o $@
 
-client : $(client_output)
-
-all: client
+# client main
+$(client_main_out) : $(client_main_deps)
+	$(nodejs) $(client_bin) $(client_args) -o $@
 
 
 
