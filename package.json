@@ -1,5 +1,5 @@
 {
-  "name": "codenodes",
+  "name": "codeNodes",
   "description": "A generic source code processing framework.",
   "repository": {
     "type": "git",
@@ -10,16 +10,16 @@
   ],
   "version": "0.0.1",
   "dependencies": {
-    "preprocessor": ">=1.0.4",
-    "closure-compiler": ">=0.2.x",
-    "optimist": ">=0.6.x"
+    "preprocessor": "1.0.x",
+    "closure-compiler": "0.2.x",
+    "optimist": "0.6.x"
   },
   "author": {
     "name": "Sebastian Boethin",
-    "email": "sebastian@boethin.eu"
+    "email": "boethin@codenodes.org"
   },
   "bugs": {
-    "email": "bugs@autobugfix.com",
+    "email": "bugs@codenodes.org",
     "url": "https://github.com/boethin/codenodes/issues"
   },
   "license": {
